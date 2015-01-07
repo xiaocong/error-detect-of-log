@@ -1,0 +1,520 @@
+Build: Xiaomi/entrapment/entrapment:4.3/JLS36G/799:userdebug/release-keys
+Hardware: BD_MST051D_20ANV
+Revision: 32
+Bootloader: unknown
+Radio: unknown
+Kernel: Linux version 3.1.10 (jenkins@sysserver2) (gcc version 4.7 (GCC) ) #1 SMP PREEMPT Sat Jul 26 03:11:56 CST 2014
+
+*** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+Build fingerprint: 'Xiaomi/entrapment/entrapment:4.3/JLS36G/799:userdebug/release-keys'
+Revision: '32'
+pid: 24808, tid: 24855, name: BTU  >>> com.android.bluetooth <<<
+signal 11 (SIGSEGV), code 1 (SEGV_MAPERR), fault addr 00004002
+    r0 5fcaaf08  r1 00000000  r2 00000504  r3 60cabab8
+    r4 00000004  r5 00004000  r6 60cabb1c  r7 00000008
+    r8 5fbb19c8  r9 5fcaaf08  sl 60cabf00  fp 400a93b8
+    ip 00000003  sp 60cabad0  lr 5faa25ed  pc 5faa26f2  cpsr 20010030
+    d0  20646e756f66203a  d1  7665645f646e6966
+    d2  6f63203a6b636162  d3  203d2064695f6e6e
+    d4  00085fb61ed10000  d5  003660cabde40000
+    d6  00085fb61ed10000  d7  001598976d3f0000
+    d8  0000000000000000  d9  0000000000000000
+    d10 0000000000000000  d11 0000000000000000
+    d12 0000000000000000  d13 0000000000000000
+    d14 0000000000000000  d15 0000000000000000
+    d16 3fe8000000000000  d17 3fc999999999999a
+    d18 4146605000000000  d19 0065004e005f0061
+    d20 3f8948b0fcd6e9e0  d21 3fe555b0aaeac752
+    d22 3fd24998d6307188  d23 3fcc7288e957b53b
+    d24 3fc74721cad6b0ed  d25 3fc2f112df3e5244
+    d26 40026bb1bbb55516  d27 4000000000000000
+    d28 40008df2d49d41f1  d29 3fb0f4a31edab38b
+    d30 3ff0000000000000  d31 3f4de16b9c24a98f
+    scr 60000010
+
+backtrace:
+    #00  pc 0004e6f2  /system/lib/hw/bluetooth.default.so
+    #01  pc 00092663  /system/lib/hw/bluetooth.default.so (bta_hh_le_write_cmpl+218)
+    #02  pc 000944dd  /system/lib/hw/bluetooth.default.so (bta_hh_sm_execute+408)
+    #03  pc 0008c981  /system/lib/hw/bluetooth.default.so (bta_gattc_write_cmpl+208)
+    #04  pc 0008b4fd  /system/lib/hw/bluetooth.default.so (bta_gattc_sm_execute+108)
+    #05  pc 0009e1f7  /system/lib/hw/bluetooth.default.so (bta_sys_event+54)
+    #06  pc 000e3beb  /system/lib/hw/bluetooth.default.so (btu_task+610)
+    #07  pc 00086b05  /system/lib/hw/bluetooth.default.so (gki_task_entry+92)
+    #08  pc 0000caa0  /system/lib/libc.so (__thread_entry+72)
+    #09  pc 0000cc1c  /system/lib/libc.so (pthread_create+208)
+
+stack:
+         60caba90  00000004  
+         60caba94  00000010  
+         60caba98  00000008  
+         60caba9c  5fa8e4bf  /system/lib/hw/bluetooth.default.so (LogMsg+134)
+         60cabaa0  00000504  
+         60cabaa4  60cabab8  
+         60cabaa8  5fcaaf08  
+         60cabaac  5fbb19c8  /system/lib/hw/bluetooth.default.so
+         60cabab0  5faa25ed  /system/lib/hw/bluetooth.default.so (btif_hh_find_dev_by_handle+84)
+         60cabab4  5fb68fb6  /system/lib/hw/bluetooth.default.so
+         60cabab8  5fba6ab1  /system/lib/hw/bluetooth.default.so
+         60cababc  00000000  
+         60cabac0  00000004  
+         60cabac4  60cabbb8  
+         60cabac8  df0027ad  
+         60cabacc  00000000  
+    #00  60cabad0  5fb83ba1  /system/lib/hw/bluetooth.default.so
+         60cabad4  98976d3f  
+         60cabad8  4021a609  /system/lib/libcutils.so
+         60cabadc  00000000  
+         60cabae0  00000004  
+         60cabae4  5fbb0d78  /system/lib/hw/bluetooth.default.so
+         60cabae8  00000004  
+         60cabaec  5fca4b98  
+         60cabaf0  60cabbb8  
+         60cabaf4  5fbb0d78  /system/lib/hw/bluetooth.default.so
+         60cabaf8  00000004  
+         60cabafc  401841f4  
+         60cabb00  00000000  
+         60cabb04  60cabf00  
+         60cabb08  400a93b8  
+         60cabb0c  5fae6665  /system/lib/hw/bluetooth.default.so (bta_hh_le_write_cmpl+220)
+    #01  60cabb10  00000058  
+         60cabb14  00000000  
+         60cabb18  401841f4  
+         60cabb1c  40211000  
+         60cabb20  00004000  
+         60cabb24  60cabae4  
+         60cabb28  00000000  
+         60cabb2c  60cabb24  
+         60cabb30  00000001  
+         60cabb34  98976d3f  
+         60cabb38  00000008  
+         60cabb3c  00000000  
+         60cabb40  00000003  
+         60cabb44  00000003  
+         60cabb48  5fca4b98  
+         60cabb4c  98976d3f  
+         ........  ........
+    #02  60cabb70  5fb83ad9  /system/lib/hw/bluetooth.default.so
+         60cabb74  00000004  
+         60cabb78  59dee924  
+         60cabb7c  00000000  
+         60cabb80  00000000  
+         60cabb84  00000000  
+         60cabb88  00000000  
+         60cabb8c  00000000  
+         60cabb90  5fae7103  /system/lib/hw/bluetooth.default.so
+         60cabb94  5fc97268  
+         60cabb98  401841f4  
+         60cabb9c  00000004  
+         60cabba0  59dee924  
+         60cabba4  5fbb19c9  /system/lib/hw/bluetooth.default.so
+         60cabba8  5fb81369  /system/lib/hw/bluetooth.default.so
+         60cabbac  5fae0983  /system/lib/hw/bluetooth.default.so (bta_gattc_write_cmpl+210)
+    #03  60cabbb0  60cabbe6  
+         60cabbb4  00000000  
+         60cabbb8  02000005  
+         60cabbbc  12000000  
+         60cabbc0  00000018  
+         60cabbc4  00000000  
+         60cabbc8  00000000  
+         60cabbcc  00000000  
+         60cabbd0  00000201  
+         60cabbd4  002a4d00  
+         60cabbd8  00000000  
+         60cabbdc  00000000  
+         60cabbe0  00000000  
+         60cabbe4  00000600  
+         60cabbe8  00000000  
+         60cabbec  00000000  
+         ........  ........
+    #04  60cabe70  00001f0f  
+         60cabe74  5fb811fd  /system/lib/hw/bluetooth.default.so
+         60cabe78  59dee924  
+         60cabe7c  59dee924  
+         60cabe80  5fbb0d78  /system/lib/hw/bluetooth.default.so
+         60cabe84  5fcab8f0  
+         60cabe88  5fbb0d78  /system/lib/hw/bluetooth.default.so
+         60cabe8c  00000018  
+         60cabe90  5fcab93c  
+         60cabe94  5faf21f9  /system/lib/hw/bluetooth.default.so (bta_sys_event+56)
+    #05  60cabe98  00006117  
+         60cabe9c  00000000  
+         60cabea0  00000004  
+         60cabea4  5fb37bef  /system/lib/hw/bluetooth.default.so (btu_task+614)
+    #06  60cabea8  98976d3f  
+         60cabeac  5fcabcdc  
+         60cabeb0  5fcaa7a0  
+         60cabeb4  00000000  
+         60cabeb8  5fba8b8c  /system/lib/hw/bluetooth.default.so
+         60cabebc  5fb80324  /system/lib/hw/bluetooth.default.so
+         60cabec0  60bac000  
+         60cabec4  5fadab07  /system/lib/hw/bluetooth.default.so (gki_task_entry+94)
+    #07  60cabec8  00000000  
+         60cabecc  5fb61c4b  /system/lib/hw/bluetooth.default.so
+         60cabed0  60cabf00  
+         60cabed4  400a93b8  
+         60cabed8  5fadaaa9  /system/lib/hw/bluetooth.default.so (gki_task_entry)
+         60cabedc  5fcabcdc  
+         60cabee0  5fcaa7a4  
+         60cabee4  40145aa4  /system/lib/libc.so (__thread_entry+76)
+    #08  60cabee8  5fcabcdc  
+         60cabeec  00000002  
+         60cabef0  00100000  
+         60cabef4  5fcabcdc  
+         60cabef8  00000078  
+         60cabefc  40145c20  /system/lib/libc.so (pthread_create+212)
+    #09  60cabf00  60cabf00  
+         60cabf04  400a93b8  
+         60cabf08  00000002  
+         60cabf0c  00000000  
+         60cabf10  00000000  
+         60cabf14  98976d3f  
+         60cabf18  00000000  
+         60cabf1c  00000000  
+         60cabf20  00000000  
+         60cabf24  00000000  
+         60cabf28  00000000  
+         60cabf2c  00000000  
+         60cabf30  00000000  
+         60cabf34  00000000  
+         60cabf38  00000000  
+         60cabf3c  00000000  
+
+memory near r0:
+    5fcaaee8 00000000 00000000 00000000 00000000  
+    5fcaaef8 00000000 00000000 00000201 00000001  
+    5fcaaf08 78100101 a12004a5 0000003c 0000ff00  
+    5fcaaf18 00000056 00000000 529b1c50 00000001  
+    5fcaaf28 00000000 00000000 00000000 00000000  
+    5fcaaf38 00000000 00000000 00000000 00000007  
+    5fcaaf48 00000001 00000000 00000000 00000000  
+    5fcaaf58 00000000 00000000 00000000 00000000  
+    5fcaaf68 00000000 00000000 00000000 00000000  
+    5fcaaf78 00000000 00000000 00000000 00000000  
+    5fcaaf88 00000000 00000000 00000000 00000000  
+    5fcaaf98 00000000 00000000 00000000 00000000  
+    5fcaafa8 00000000 00000000 00000000 00000000  
+    5fcaafb8 00000000 00000000 00000000 00000000  
+    5fcaafc8 00000000 00000000 00000000 00000000  
+    5fcaafd8 00000000 00000000 00000000 00000000  
+
+memory near r3:
+    60caba98 00000008 5fa8e4bf 00000504 60cabab8  
+    60cabaa8 5fcaaf08 5fbb19c8 5faa25ed 5fb68fb6  
+    60cabab8 5fba6ab1 00000000 00000004 60cabbb8  
+    60cabac8 df0027ad 00000000 5fb83ba1 98976d3f  
+    60cabad8 4021a609 00000000 00000004 5fbb0d78  
+    60cabae8 00000004 5fca4b98 60cabbb8 5fbb0d78  
+    60cabaf8 00000004 401841f4 00000000 60cabf00  
+    60cabb08 400a93b8 5fae6665 00000058 00000000  
+    60cabb18 401841f4 40211000 00004000 60cabae4  
+    60cabb28 00000000 60cabb24 00000001 98976d3f  
+    60cabb38 00000008 00000000 00000003 00000003  
+    60cabb48 5fca4b98 98976d3f 60cabbb8 00001711  
+    60cabb58 00000003 5fca4b98 5fbb19c9 5fb83ba1  
+    60cabb68 60cabf00 5fae84df 5fb83ad9 00000004  
+    60cabb78 59dee924 00000000 00000000 00000000  
+    60cabb88 00000000 00000000 5fae7103 5fc97268  
+
+memory near r5:
+    00003fe0 ffffffff ffffffff ffffffff ffffffff  
+    00003ff0 ffffffff ffffffff ffffffff ffffffff  
+    00004000 ffffffff ffffffff ffffffff ffffffff  
+    00004010 ffffffff ffffffff ffffffff ffffffff  
+    00004020 ffffffff ffffffff ffffffff ffffffff  
+    00004030 ffffffff ffffffff ffffffff ffffffff  
+    00004040 ffffffff ffffffff ffffffff ffffffff  
+    00004050 ffffffff ffffffff ffffffff ffffffff  
+    00004060 ffffffff ffffffff ffffffff ffffffff  
+    00004070 ffffffff ffffffff ffffffff ffffffff  
+    00004080 ffffffff ffffffff ffffffff ffffffff  
+    00004090 ffffffff ffffffff ffffffff ffffffff  
+    000040a0 ffffffff ffffffff ffffffff ffffffff  
+    000040b0 ffffffff ffffffff ffffffff ffffffff  
+    000040c0 ffffffff ffffffff ffffffff ffffffff  
+    000040d0 ffffffff ffffffff ffffffff ffffffff  
+
+memory near r6:
+    60cabafc 401841f4 00000000 60cabf00 400a93b8  
+    60cabb0c 5fae6665 00000058 00000000 401841f4  
+    60cabb1c 40211000 00004000 60cabae4 00000000  
+    60cabb2c 60cabb24 00000001 98976d3f 00000008  
+    60cabb3c 00000000 00000003 00000003 5fca4b98  
+    60cabb4c 98976d3f 60cabbb8 00001711 00000003  
+    60cabb5c 5fca4b98 5fbb19c9 5fb83ba1 60cabf00  
+    60cabb6c 5fae84df 5fb83ad9 00000004 59dee924  
+    60cabb7c 00000000 00000000 00000000 00000000  
+    60cabb8c 00000000 5fae7103 5fc97268 401841f4  
+    60cabb9c 00000004 59dee924 5fbb19c9 5fb81369  
+    60cabbac 5fae0983 60cabbe6 00000000 02000005  
+    60cabbbc 12000000 00000018 00000000 00000000  
+    60cabbcc 00000000 00000201 002a4d00 00000000  
+    60cabbdc 00000000 00000000 00000600 00000000  
+    60cabbec 00000000 00000000 00000000 00000000  
+
+memory near r8:
+    5fbb19a8 5fae202d 00000000 5fbaf234 5fbaf264  
+    5fbb19b8 5fbafce0 5fba8f58 5fbafd60 5fba91ea  
+    5fbb19c8 00000606 5fba9612 5fbb19e4 5fba9846  
+    5fbb19d8 5fba9b82 5fba980a 5fbbf2ec 00000000  
+    5fbb19e8 00000000 00020000 000204b0 01680002  
+    5fbb19f8 000200a0 5fba9bbf 5fba9854 5fbaf478  
+    5fbb1a08 5fbb00e8 02100120 03030230 01250313  
+    5fbb1a18 06020501 00000323 5fb8917c 5fb89180  
+    5fbb1a28 5fb8918b 5fb7d2f6 5fb89196 5fb891a3  
+    5fbb1a38 5fb89176 5fb83601 5fb83607 5fb8360e  
+    5fbb1a48 5fb7d2e5 5fb7d2f0 5fb8910b 5fb89114  
+    5fbb1a58 5fb8911d 5fb7f65b 5fb89127 5fb89132  
+    5fbb1a68 5fb8913d 5fb89147 5fb89151 5fb8915a  
+    5fbb1a78 5fb89163 5fb89168 5fb8916d 5fbb00f4  
+    5fbb1a88 00000000 00100000 80000080 fb349b5f  
+    5fbb1a98 5fbaf4b0 5fb05cf1 00000000 00000000  
+
+memory near r9:
+    5fcaaee8 00000000 00000000 00000000 00000000  
+    5fcaaef8 00000000 00000000 00000201 00000001  
+    5fcaaf08 78100101 a12004a5 0000003c 0000ff00  
+    5fcaaf18 00000056 00000000 529b1c50 00000001  
+    5fcaaf28 00000000 00000000 00000000 00000000  
+    5fcaaf38 00000000 00000000 00000000 00000007  
+    5fcaaf48 00000001 00000000 00000000 00000000  
+    5fcaaf58 00000000 00000000 00000000 00000000  
+    5fcaaf68 00000000 00000000 00000000 00000000  
+    5fcaaf78 00000000 00000000 00000000 00000000  
+    5fcaaf88 00000000 00000000 00000000 00000000  
+    5fcaaf98 00000000 00000000 00000000 00000000  
+    5fcaafa8 00000000 00000000 00000000 00000000  
+    5fcaafb8 00000000 00000000 00000000 00000000  
+    5fcaafc8 00000000 00000000 00000000 00000000  
+    5fcaafd8 00000000 00000000 00000000 00000000  
+
+memory near sl:
+    60cabee0 5fcaa7a4 40145aa4 5fcabcdc 00000002  
+    60cabef0 00100000 5fcabcdc 00000078 40145c20  
+    60cabf00 60cabf00 400a93b8 00000002 00000000  
+    60cabf10 00000000 98976d3f 00000000 00000000  
+    60cabf20 00000000 00000000 00000000 00000000  
+    60cabf30 00000000 00000000 00000000 00000000  
+    60cabf40 00000000 00000000 00000000 00000000  
+    60cabf50 00000000 00000000 00000000 00000000  
+    60cabf60 00000000 00000000 00000000 00000000  
+    60cabf70 00000000 00000000 00000000 00000000  
+    60cabf80 00000000 00000000 00000000 00000000  
+    60cabf90 00000000 00000000 00000000 00000000  
+    60cabfa0 00000000 00000000 00000000 00000000  
+    60cabfb0 00000000 00000000 00000000 00000000  
+    60cabfc0 00000000 00000000 00000000 00000000  
+    60cabfd0 00000000 00000000 00000000 00000000  
+
+memory near fp:
+    400a9398 00000020 0000001b 00000000 00000001  
+    400a93a8 400a9394 00000000 00000000 0000024b  
+    400a93b8 400c1aa0 5209cfc0 00000000 60bac000  
+    400a93c8 00100000 00001000 00000000 00000000  
+    400a93d8 00006117 00000001 00000000 00000000  
+    400a93e8 00000000 00000000 00000000 60cabf00  
+    400a93f8 00000000 00000000 00000000 00000000  
+    400a9408 00000000 00000000 00000000 00000000  
+    400a9418 00000000 00000000 00000000 00000000  
+    400a9428 00000000 00000000 00000000 00000000  
+    400a9438 00000000 00000000 00000000 00000000  
+    400a9448 00000000 00000000 00000000 00000000  
+    400a9458 00000000 00000000 00000000 00000000  
+    400a9468 00000000 00000000 00000000 00000000  
+    400a9478 00000000 00000000 00000000 00000000  
+    400a9488 00000000 00000000 00000000 00000000  
+
+memory near sp:
+    60cabab0 5faa25ed 5fb68fb6 5fba6ab1 00000000  
+    60cabac0 00000004 60cabbb8 df0027ad 00000000  
+    60cabad0 5fb83ba1 98976d3f 4021a609 00000000  
+    60cabae0 00000004 5fbb0d78 00000004 5fca4b98  
+    60cabaf0 60cabbb8 5fbb0d78 00000004 401841f4  
+    60cabb00 00000000 60cabf00 400a93b8 5fae6665  
+    60cabb10 00000058 00000000 401841f4 40211000  
+    60cabb20 00004000 60cabae4 00000000 60cabb24  
+    60cabb30 00000001 98976d3f 00000008 00000000  
+    60cabb40 00000003 00000003 5fca4b98 98976d3f  
+    60cabb50 60cabbb8 00001711 00000003 5fca4b98  
+    60cabb60 5fbb19c9 5fb83ba1 60cabf00 5fae84df  
+    60cabb70 5fb83ad9 00000004 59dee924 00000000  
+    60cabb80 00000000 00000000 00000000 00000000  
+    60cabb90 5fae7103 5fc97268 401841f4 00000004  
+    60cabba0 59dee924 5fbb19c9 5fb81369 5fae0983  
+
+code around pc:
+    5faa26d0 5000f898 d9672d04 f240495b 44795004  
+    5faa26e0 ffe4f7eb 7831e060 d1432900 2d006875  
+    5faa26f0 f8b5d03a f1baa002 d1170f00 f898e027  
+    5faa2700 2a042000 6870d910 eb004662 88810e05  
+    5faa2710 5004f240 0301eb0e 7a1b4659 c014f8cd  
+    5faa2720 ffc4f7eb c014f8dd e0063501 b11cf8df  
+    5faa2730 f8df460d 44fbc11c 455544fc 6875dbdf  
+    5faa2740 78314648 886a88ab 18eb3308 f898e014  
+    5faa2750 2d045000 493fd905 5004f240 f7eb4479  
+    5faa2760 4648ffa5 e0052105 462a2105 f01a462b  
+    5faa2770 e035fbe7 46132200 fbe2f01a 2702e014  
+    5faa2780 3000f898 d9072b04 f2404933 78325004  
+    5faa2790 78734479 ff8af7eb f7ff7870 4605fefd  
+    5faa27a0 7831b120 fc5ef01a e0192500 0000f898  
+    5faa27b0 492ab1a8 60a0f44f f7eb4479 e00fff77  
+    5faa27c0 f8982500 2a012000 4925d90a 5001f240  
+
+code around lr:
+    5faa25cc f894b17a 45b4c002 7828d10b d9172804  
+    5faa25dc f2404911 4a115004 447a4479 f860f7ec  
+    5faa25ec 3301e00e d1e72b07 2c04782c 490cd907  
+    5faa25fc 5004f240 44794a0b f7ec447a 2400f851  
+    5faa260c bd704620 0010e7d4 fffffdb4 000c69f0  
+    5faa261c 001044f7 fffffe1c 000c69ce 001044c7  
+    5faa262c 000c696f 001044a9 4a814b80 e92d447b  
+    5faa263c 460e4ff0 4604b087 8002f853 f0002800  
+    5faa264c 280280e3 80e3f000 f0002801 280380e6  
+    5faa265c 80e6f000 d104280a 4d76898f 447d3714  
+    5faa266c 2806e0a9 80d6f000 d0192804 f0002808  
+    5faa267c 280780d4 80d4f000 d07a2805 f000280d  
+    5faa268c 280980cf 80ccf000 070bf1a0 bf942f01  
+    5faa269c 2700270b d0042804 f0402805 e069808b  
+    5faa26ac f8982708 29041000 4963d907 5004f240  
+    5faa26bc 44797832 f7eb7873 7870fff3 ff66f7ff  
+
+memory map around fault addr 00004002:
+    (no map below)
+    (no map for address)
+    40000000-40002000 r-- /system/app/Bluetooth.apk
+--------- tail end of log /dev/log/main
+07-28 09:42:29.466 24808 24855 D bt-btif : BTA_HH_GET_RPT_EVT: status = 0, handle = 16
+07-28 09:42:29.466 24808 24855 D bt-btif : btif_hh_find_dev_by_handle: handle=16
+07-28 09:42:29.466 24808 24855 D bt-btif : btif_hh_find_dev_by_handle: found @ 0
+07-28 09:42:29.466 24808 24855 F libc    : Fatal signal 11 (SIGSEGV) at 0x00004002 (code=1), thread 24855 (BTU)
+07-28 09:42:29.562 24808 24857 E GKI_LINUX: ##### ERROR : release_wake_lock: failed to get lock file=-1#####
+--- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+pid: 24808, tid: 24808, name: droid.bluetooth
+    r0 fffffffc  r1 be813828  r2 00000010  r3 00002015
+    r4 41e22668  r5 00000000  r6 41e2267c  r7 000000fc
+    r8 41e226b0  r9 00000014  sl 41dfc798  fp be81399c
+    ip be813828  sp be813808  lr 40114fcd  pc 4015549c  cpsr 200f0010
+    d0  0000000000000000  d1  0000000000000000
+    d2  0000000000000000  d3  0000000000000000
+    d4  39040000003c0000  d5  9d3052599d40be81
+    d6  eadff8f000255259  d7  4f4d8efcdc7b9dcb
+    d8  0000000000000000  d9  0000000000000000
+    d10 0000000000000000  d11 0000000000000000
+    d12 0000000000000000  d13 0000000000000000
+    d14 0000000000000000  d15 0000000000000000
+    d16 4040000000000000  d17 4040000000000000
+    d18 4146605000000000  d19 0065004e005f0061
+    d20 3f8948b0fcd6e9e0  d21 3fe555b0aaeac752
+    d22 3fd24998d6307188  d23 3fcc7288e957b53b
+    d24 3fc74721cad6b0ed  d25 3fc2f112df3e5244
+    d26 40026bb1bbb55516  d27 4000000000000000
+    d28 40008df2d49d41f1  d29 3fb0f4a31edab38b
+    d30 3ff0000000000000  d31 3f4de16b9c24a98f
+    scr 60000010
+
+backtrace:
+    #00  pc 0001c49c  /system/lib/libc.so (epoll_wait+12)
+    #01  pc 00014fc9  /system/lib/libutils.so (android::Looper::pollInner(int)+92)
+    #02  pc 000151ed  /system/lib/libutils.so (android::Looper::pollOnce(int, int*, int*, void**)+92)
+    #03  pc 00068c65  /system/lib/libandroid_runtime.so (android::NativeMessageQueue::pollOnce(_JNIEnv*, int)+22)
+    #04  pc 0001dc4c  /system/lib/libdvm.so (dvmPlatformInvoke+112)
+    #05  pc 0004df57  /system/lib/libdvm.so (dvmCallJNIMethod(unsigned int const*, JValue*, Method const*, Thread*)+398)
+    #06  pc 00000214  /dev/ashmem/dalvik-jit-code-cache (deleted)
+
+stack:
+         be8137c8  b7080dcc  
+         be8137cc  e9754a7a  
+         be8137d0  401f1dc0  /system/lib/libbinder.so
+         be8137d4  41e23bf8  
+         be8137d8  be8137f4  [stack]
+         be8137dc  41e23bf8  
+         be8137e0  be81380c  [stack]
+         be8137e4  401e1605  /system/lib/libbinder.so
+         be8137e8  7fffffff  
+         be8137ec  41e22668  
+         be8137f0  00000000  
+         be8137f4  00002015  
+         be8137f8  be813828  [stack]
+         be8137fc  41e226b0  
+         be813800  00000014  
+         be813804  40114fbb  /system/lib/libutils.so (android::Looper::pollInner(int)+78)
+    #00  be813808  41e23bf8  
+         ........  ........
+    #01  be813808  41e23bf8  
+         be81380c  41d7dd58  
+         be813810  00000004  
+         be813814  41e23bf8  
+         be813818  00000000  
+         be81381c  00000000  
+         be813820  59b8f0b8  /dev/binder
+         be813824  401e755f  /system/lib/libbinder.so (android::Parcel::freeDataNoInit()+30)
+         be813828  41e23bf8  
+         be81382c  59b8f0b8  /dev/binder
+         be813830  00000004  
+         be813834  41e23bf8  
+         be813838  00000004  
+         be81383c  401e75a5  /system/lib/libbinder.so (android::Parcel::ipcSetDataReference(unsigned char const*, unsigned int, unsigned int const*, unsigned int, void (*)(android::Parcel*, unsigned char const*, unsigned int, unsigned int const*, unsigned int, void*), void*)+26)
+         be813840  00000000  
+         be813844  41e227b0  
+         ........  ........
+    #02  be813950  00000000  
+         be813954  41d79230  
+         be813958  00000000  
+         be81395c  41dfc348  
+         be813960  58333e18  
+         be813964  be813988  [stack]
+         be813968  58333e10  
+         be81396c  40288c69  /system/lib/libandroid_runtime.so (android::NativeMessageQueue::pollOnce(_JNIEnv*, int)+26)
+    #03  be813970  00000000  
+         be813974  41dfc348  
+         be813978  584a6920  /dev/ashmem/dalvik-LinearAlloc (deleted)
+         be81397c  41dfc788  
+         be813980  00000000  
+         be813984  40fdec50  /system/lib/libdvm.so (dvmPlatformInvoke+116)
+    #04  be813988  58333e10  
+         be81398c  00000001  
+         be813990  00000008  
+         be813994  42016198  /dev/ashmem/dalvik-heap (deleted)
+         be813998  00000000  
+         be81399c  4100ef5b  /system/lib/libdvm.so (dvmCallJNIMethod(unsigned int const*, JValue*, Method const*, Thread*)+402)
+    #05  be8139a0  58333e10  
+         be8139a4  5a959fd2  /data/dalvik-cache/system@framework@framework.jar@classes.dex
+         be8139a8  40288c83  /system/lib/libandroid_runtime.so
+         be8139ac  41dfc798  
+         be8139b0  00000000  
+         be8139b4  00000000  
+         be8139b8  38b0001d  
+         be8139bc  00000000  
+         be8139c0  58333b54  
+         be8139c4  401841f4  
+         be8139c8  58412730  /dev/ashmem/dalvik-LinearAlloc (deleted)
+         be8139cc  be813a48  [stack]
+         be8139d0  00000000  
+         be8139d4  41020fad  /system/lib/libdvm.so (dvmCallMethodV(Thread*, Method const*, Object*, bool, JValue*, std::__va_list)+296)
+         be8139d8  41dfc788  
+         be8139dc  58412730  /dev/ashmem/dalvik-LinearAlloc (deleted)
+         ........  ........
+    #06  be813ab8  421e50a0  /dev/ashmem/dalvik-heap (deleted)
+         be813abc  fffffe58  
+         be813ac0  40feef90  /system/lib/libdvm.so (dvmMterpStd(Thread*))
+         be813ac4  00000000  
+         be813ac8  be813b80  [stack]
+         be813acc  41dfc788  
+         be813ad0  be813aec  [stack]
+         be813ad4  584b6e38  /dev/ashmem/dalvik-LinearAlloc (deleted)
+         be813ad8  42302a0c  /dev/ashmem/dalvik-heap (deleted)
+         be813adc  40fec678  /system/lib/libdvm.so (dvmInterpret(Thread*, Method const*, JValue*)+188)
+         be813ae0  f1fadea7  
+         be813ae4  00000000  
+         be813ae8  421e50a0  /dev/ashmem/dalvik-heap (deleted)
+         be813aec  5a7f2cf4  /data/dalvik-cache/system@framework@framework.jar@classes.dex
+         be813af0  58333ebc  
+         be813af4  5841b2a8  /dev/ashmem/dalvik-LinearAlloc (deleted)
+--- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+pid: 24808, tid: 24812, name: GC
+    r0 41dfc740  r1 00000080  r2 fffffea2  r3 00000000
+    r4 41dfc740  r5 41dfc73c  r6 fffffea2  r7 000000f0
+    r8 410710a8  r9 410710a8  sl 5cf1ef00  fp 41d792d8
+    ip 00000001  sp 5cf1ee68  lr 401476f4  pc 40155664  cpsr 60070010
+    d0  61746f74202c736d  d1  0000004042805b22
+    d2
