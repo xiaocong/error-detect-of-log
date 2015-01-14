@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from utils import detect_string
+from utils import detect_string, gen_hashcode
 
 
 def detect_detail(raw_string, process):
@@ -21,5 +21,6 @@ def app_crash(logcat):
         if process:
             detail = detect_detail(content[1], process)
             if exception and detail:
-                return {'issue_owner': process, 'exception': exception, 'detail': detail}
+                md5 = gen_hashcode({'issue_owner': process, 'exception': exception, 'detail': detail})
+                return md5, {'issue_owner': process, 'exception': exception, 'detail': detail}
     return {}

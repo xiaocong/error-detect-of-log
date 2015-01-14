@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from utils import detect_string
+from utils import detect_string, gen_hashcode
 
 
 def app_wtf(logcat):
@@ -10,5 +10,6 @@ def app_wtf(logcat):
         exception = detect_string(content[1], r'^(\w+(?:[.$_]\w+)+)')
         detail = detect_string(content[1], r'\t(at\s+android\.util\.Log\.wtf.*)')
         if process and exception and detail:
-            return {'issue_owner': process, 'exception': exception, 'detail': detail}
+            md5 = gen_hashcode({'issue_owner': process, 'exception': exception, 'detail': detail})
+            return md5, {'issue_owner': process, 'exception': exception, 'detail': detail}
     return {}
