@@ -7,10 +7,10 @@ from docopt import docopt
 from ed import *
 
 TAGS = {
-        "system_app_crash": app_crash,
-        "SYSTEM_TOMBSTONE": system_tombstone,
-        "system_app_wtf":   app_wtf,
-        "system_app_anr":   app_anr,
+    "system_app_crash": app_crash,
+    "SYSTEM_TOMBSTONE": system_tombstone,
+    "system_app_wtf":   app_wtf,
+    "system_app_anr":   app_anr,
 }
 
 
@@ -63,7 +63,7 @@ def api_detect(tag):
     if not tag in TAGS.keys():
         return jsonify(status=0, msg='tag not supported', features={})
     try:
-        data = json.loads(request.data).get('logcat')
+        data = request.data
         if data:
             features = TAGS[tag](data)
             if features:
