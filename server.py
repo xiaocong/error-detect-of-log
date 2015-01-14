@@ -1,17 +1,10 @@
 # -*- coding: utf-8 -*-
 
 import os
-import json
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify
 from docopt import docopt
-from ed import *
-
-TAGS = {
-    "system_app_crash": app_crash,
-    "SYSTEM_TOMBSTONE": system_tombstone,
-    "system_app_wtf":   app_wtf,
-    "system_app_anr":   app_anr,
-}
+from ed import setup_ed
+from ticket import setup_ticket
 
 
 def root(p=None):
@@ -58,24 +51,6 @@ def exception_handler():
     return jsonify(status=0, msg='server exception', features={})
 
 
-@app.route('/api/detect/<tag>', methods=['POST'])
-def api_detect(tag):
-    if not tag in TAGS.keys():
-        return jsonify(status=0, msg='tag not supported', features={})
-    try:
-        data = request.data
-        if data:
-            features = TAGS[tag](data)
-            if features:
-                return jsonify(status=1, msg='feature detected', features=features)
-            else:
-                return jsonify(status=0, msg='failed to detect features', features={})
-        else:
-            return jsonify(status=0, msg='logcat field required', features={})
-    except Exception:
-        return jsonify(status=0, msg='failed to detect features', features={})
-
-
 def run_app(app_):
     host, port = '0.0.0.0', app_.config.get('SERVER_PORT', 9786)
     if app_.config.get('DEBUG', False):
@@ -111,4 +86,6 @@ def run_app(app_):
 
 
 if __name__ == "__main__":
+    setup_ed(app)
+    setup_ticket(app)
     run_app(app)

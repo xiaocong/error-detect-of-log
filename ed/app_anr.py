@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import re
-from utils import detect_string
+from utils import detect_string, gen_hashcode
 
 IOWAIT_THRESHOLD = 35.0
 TOTAL_THRESHOLD = 40.0
@@ -103,5 +103,6 @@ def app_anr(logcat):
             if tag == "RECOVER":
                 break
             if process and detail:
-                return {'issue_owner': process, 'detail': detail}
+                md5 = gen_hashcode({'issue_owner': process, 'detail': detail})
+                return md5, {'issue_owner': process, 'detail': detail}
     return {}
