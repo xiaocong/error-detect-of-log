@@ -3,11 +3,22 @@
 import re
 from utils import detect_string, gen_hashcode
 
+IGNORE = ['/data/app-lib', '/mnt/asec/', '/data/data/']
+
 
 def detect_trace(contents):
     for content in contents:
         if "backtrace:" in content:
             return re.findall(r'((?:/.+)+(?: \(.+\))*)', content)
+
+
+def valide_backtrace(backtrace):
+    if backtrace:
+        for bt in backtrace:
+            for ig in IGNORE:
+                if ig in bt:
+                    return []
+        return backtrace
 
 
 def detect_issue_owner(backtrace):
@@ -18,7 +29,8 @@ def detect_issue_owner(backtrace):
                 break
         else:
             lib = backtrace[0]
-        return lib.split('/')[-1] if '/' in lib else lib
+        ret = lib.split('/')[-1] if '/' in lib else lib
+        return None if '<unknown>' in ret else ret
 
 
 def system_tombstone(logcat):
@@ -26,7 +38,7 @@ def system_tombstone(logcat):
     if len(content) >= 3:
         #process = detect_string(content[1], r'\s+>>>\s+(.*)\s+<<<')
         signal = detect_string(content[1], r'^(signal\s+\d+\s+\(\w+\),\s+code\s+\d+\s+\(\w+\))')
-        backtrace = detect_trace(content[2:])
+        backtrace = valide_backtrace(detect_trace(content[2:]))
         issue_owner = detect_issue_owner(backtrace)
         if issue_owner and signal and backtrace:
             md5 = gen_hashcode({'issue_owner': issue_owner, 'signal': signal, 'backtrace': backtrace})
