@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from jira.client import JIRA
+import re
 
 
 class JiraHandler(object):
@@ -34,11 +35,11 @@ class JiraHandler(object):
     def detect_max_ver(self, issue):
         if issue.fields.versions:
             target_vers = [ver.name for ver in issue.fields.versions]
-            target_vers.extend(detect_comments_vers(issue))
+            target_vers.extend(self.detect_comments_vers(issue))
             if len(target_vers) > 1:
                 maxver = ""
                 for i in range(len(target_vers) - 1):
-                    maxver = target_vers[i+1] if compare_sys_ver(target_vers[i], target_vers[i+1]) else target_vers[i]
+                    maxver = target_vers[i+1] if self.compare_sys_ver(target_vers[i], target_vers[i+1]) else target_vers[i]
                 return maxver
             return target_vers[0]
         return None
@@ -54,7 +55,7 @@ class JiraHandler(object):
             if issue:
                 if issue.fields.resolution:
                     if issue.fields.resolution.name == 'Cannot Reproduce':
-                        if self.compare_sys_ver(sys_ver, self.detect_max_ver(self.get_ticket(ticket_id))):
+                        if self.compare_sys_ver(sys_ver, self.detect_max_ver(issue)):
                             return 0, 'reopen'
                     elif issue.fields.resolution.name == 'Fixed':
                         if issue.fields.status.name in ['Closed', 'Integrated']:

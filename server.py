@@ -54,7 +54,7 @@ def exception_handler():
 def run_app(app_):
     host, port = '0.0.0.0', app_.config.get('SERVER_PORT', 9786)
     if app_.config.get('DEBUG', False):
-        app_.logger.info("* run: flask")
+        #app_.logger.info("* run: flask")
         app_.run(host=host, port=port)
     else:
         try:
