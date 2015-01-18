@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-DEBUG = False
+DEBUG = True
 
 SERVER_PORT = 9786
 
