@@ -28,7 +28,7 @@ def api_detect(tag):
             else:
                 return jsonify(status=0, msg='failed to detect features', features={})
         else:
-            return jsonify(status=0, msg='logcat field required', features={})
+            return jsonify(status=0, msg='data can not be null', features={})
     except Exception:
         return jsonify(status=0, msg='failed to detect features', features={})
 

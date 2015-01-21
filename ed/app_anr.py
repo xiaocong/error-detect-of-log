@@ -80,16 +80,15 @@ def auto_recover(cpu_usage, mainstack, process):
 
 
 def detect_basic_info(logcat):
-    main_parts = logcat.split('\n\n\n')
-    if len(main_parts) >= 2:
-        minor_parts = main_parts[0].split('\n\n')
-        if len(minor_parts) >= 2:
-            process = detect_string(minor_parts[0], r'^Process:\s+(\w+(?:[.$_]\w+)+)')
-            cpu_usage = minor_parts[1]
-            for part in main_parts[1].split('\n\n'):
-                if detect_string(part, r'^(\"main\")\s+'):
-                    return process, cpu_usage, part
-    return None, None, None
+    process, cpu_usage, mainstack = None, None, None
+    for minor_part in logcat.split('\n\n'):
+        if not process:
+            process = detect_string(minor_part, r'^Process:\s+(\w+(?:[.$_]\w+)+)')
+        if not cpu_usage and detect_string(minor_part, r'(CPU\s+usage\s+from\s+-?\w+\s+to\s+-?\w+)'):
+            cpu_usage = minor_part
+        if not mainstack and detect_string(minor_part, r'^(\"main\")\s+'):
+            mainstack = minor_part
+    return process, cpu_usage, mainstack
 
 
 METHODS = [java_binder, system_busy, native_binder, native_lock, java_lock, mthread_busy, auto_recover]
