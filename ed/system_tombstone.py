@@ -37,7 +37,7 @@ def system_tombstone(logcat):
     content = logcat.split('\n\n')
     if len(content) >= 3:
         #process = detect_string(content[1], r'\s+>>>\s+(.*)\s+<<<')
-        signal = detect_string(content[1], r'^(signal\s+\d+\s+\(\w+\),\s+code\s+\d+\s+\(\w+\))')
+        signal = detect_string(content[1], r'^(signal\s+-?\d+\s+\(\w+\),\s+code\s+-?\d+\s+\(\w+\))')
         backtrace = valide_backtrace(detect_trace(content[2:]))
         issue_owner = detect_issue_owner(backtrace)
         if issue_owner and signal and backtrace:
