@@ -33,10 +33,15 @@ def detect_issue_owner(backtrace):
         return None if '<unknown>' in ret else ret
 
 
+def match_version(content):
+    return detect_string(content[0], r'^Build:.+/(\d+\.\d+)/') == detect_string(content[1], r'^Build\s+fingerprint:.+/(\d+\.\d+)/')
+
+
 def system_tombstone(logcat):
     content = logcat.split('\n\n')
     if len(content) >= 3:
-        #process = detect_string(content[1], r'\s+>>>\s+(.*)\s+<<<')
+        if not match_version(content):
+            return {}
         signal = detect_string(content[1], r'^(signal\s+-?\d+\s+\(\w+\),\s+code\s+-?\d+\s+\(\w+\))')
         backtrace = valide_backtrace(detect_trace(content[2:]))
         issue_owner = detect_issue_owner(backtrace)
