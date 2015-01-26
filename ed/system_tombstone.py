@@ -1,24 +1,24 @@
 # -*- coding: utf-8 -*-
 
 import re
-from utils import detect_string, gen_hashcode
+from utils import detect_string, gen_hashcode, detect_all
+from symbols import translate_traces
 
-IGNORE = ['/data/app-lib', '/mnt/asec/', '/data/data/']
+
+IGNORE = ['/data/app-lib', '/mnt/asec/', '/data/data/', '/data/app/']
 
 
 def detect_trace(contents):
     for content in contents:
         if "backtrace:" in content:
-            return re.findall(r'((?:/.+)+(?: \(.+\))*)', content)
-
-
-def valide_backtrace(backtrace):
-    if backtrace:
-        for bt in backtrace:
-            for ig in IGNORE:
-                if ig in bt:
-                    return []
-        return backtrace
+            backtrace = detect_all(content, r'((?:/.+)+(?: \(.+\))*)')
+            if backtrace:
+                for bt in backtrace:
+                    for ig in IGNORE:
+                        if ig in bt:
+                            return []
+                return backtrace, content
+    return None, None
 
 
 def detect_issue_owner(backtrace):
@@ -37,15 +37,16 @@ def match_version(content):
     return detect_string(content[0], r'^Build:.+/(\d+\.\d+)/') == detect_string(content[1], r'^Build\s+fingerprint:.+/(\d+\.\d+)/')
 
 
-def system_tombstone(logcat):
+def system_tombstone(logcat, headers):
     content = logcat.split('\n\n')
     if len(content) >= 3:
         if not match_version(content):
-            return {}
+            return None, None, None
         signal = detect_string(content[1], r'^(signal\s+-?\d+\s+\(\w+\),\s+code\s+-?\d+\s+\(\w+\))')
-        backtrace = valide_backtrace(detect_trace(content[2:]))
+        backtrace, raw_bt = detect_trace(content[2:])
         issue_owner = detect_issue_owner(backtrace)
         if issue_owner and signal and backtrace:
+            traces = translate_traces(headers, raw_bt)
             md5 = gen_hashcode({'issue_owner': issue_owner, 'signal': signal, 'backtrace': backtrace})
-            return md5, {'issue_owner': issue_owner, 'signal': signal, 'backtrace': backtrace}
-    return {}
+            return md5, {'issue_owner': issue_owner, 'signal': signal, 'backtrace': backtrace}, traces
+    return None, None, None

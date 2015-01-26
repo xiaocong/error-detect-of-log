@@ -22,9 +22,12 @@ def api_detect(tag):
     try:
         data = request.data
         if data:
-            md5, features = TAGS[tag](data)
+            md5, features, traces = TAGS[tag](data, request.headers)
             if features:
-                return jsonify(status=1, msg='feature detected', features=features, md5=md5)
+                if traces:
+                    return jsonify(status=1, msg='feature detected', features=features, md5=md5, traces=traces)
+                else:
+                    return jsonify(status=1, msg='feature detected', features=features, md5=md5)
             else:
                 return jsonify(status=0, msg='failed to detect features', features={})
         else:
