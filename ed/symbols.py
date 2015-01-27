@@ -31,7 +31,7 @@ def translate_traces(headers, raw_bt):
     traces = []
     for addr_lib in addr_libs:
         symbol_path = '/'.join([UA.get('file_path', '/file1/cm'), UA['product'], UA['build_id'], UA['type'], 'symbols', addr_lib.split(' ')[2]])
-        if os.path.exists(symbol_path):
+        if os.path.exists(symbol_path) and os.path.exists(TOOLPATH):
             cmd = ' '.join([TOOLPATH, '-f -e', symbol_path, addr_lib.split(' ')[0]])
             p = subprocess.Popen(cmd.split(' '), shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             lines = p.stdout.readlines()
@@ -39,5 +39,5 @@ def translate_traces(headers, raw_bt):
                 if "??" in line:
                     break
             else:
-                traces.append(lines[1])
+                traces.append("%s at %s" %(lines[0], lines[1]))
     return traces

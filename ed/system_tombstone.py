@@ -16,7 +16,7 @@ def detect_trace(contents):
                 for bt in backtrace:
                     for ig in IGNORE:
                         if ig in bt:
-                            return []
+                            return None, None
                 return backtrace, content
     return None, None
 
