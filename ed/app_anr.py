@@ -94,7 +94,7 @@ def detect_basic_info(logcat):
 METHODS = [java_binder, system_busy, native_binder, native_lock, java_lock, mthread_busy, auto_recover]
 
 
-def app_anr(logcat):
+def app_anr(logcat, headers):
     process, cpu_usage, mainstack = detect_basic_info(logcat)
     if process and cpu_usage and mainstack:
         for method in METHODS:
@@ -103,5 +103,5 @@ def app_anr(logcat):
                 break
             if process and detail:
                 md5 = gen_hashcode({'issue_owner': process, 'detail': detail})
-                return md5, {'issue_owner': process, 'detail': detail}
-    return {}
+                return md5, {'issue_owner': process, 'detail': detail}, None
+    return None, None, None
