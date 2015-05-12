@@ -98,10 +98,10 @@ def app_anr(logcat, headers):
     process, cpu_usage, mainstack = detect_basic_info(logcat)
     if process and cpu_usage and mainstack:
         for method in METHODS:
-            process, detail, tag = method(cpu_usage, mainstack, process)
+            proc, detail, tag = method(cpu_usage, mainstack, process)
             if tag == "RECOVER":
                 break
-            if process and detail:
-                md5 = gen_hashcode({'issue_owner': process, 'detail': detail})
-                return md5, {'issue_owner': process, 'detail': detail}, None
+            if proc and detail:
+                md5 = gen_hashcode({'issue_owner': proc, 'detail': detail})
+                return md5, {'issue_owner': proc, 'detail': detail}, None
     return None, None, None
