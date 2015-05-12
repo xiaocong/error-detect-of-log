@@ -91,7 +91,7 @@ def detect_basic_info(logcat):
     return process, cpu_usage, mainstack
 
 
-METHODS = [java_binder, system_busy, native_binder, native_lock, java_lock, mthread_busy, auto_recover]
+METHODS = [java_binder, native_lock, java_lock, system_busy, native_binder, mthread_busy, auto_recover]
 
 
 def app_anr(logcat, headers):
