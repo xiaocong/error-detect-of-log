@@ -12,6 +12,7 @@ TAGS = {
         "system_app_crash": app_crash,
         "SYSTEM_TOMBSTONE": system_tombstone,
         "system_app_wtf":   app_wtf,
+        "system_server_wtf":   app_wtf,
         "system_app_anr":   app_anr,
 }
 
