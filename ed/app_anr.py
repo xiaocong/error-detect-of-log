@@ -15,9 +15,10 @@ def detect_keyword(exp, content, mode=0):
 
 
 def java_binder(cpu_usage, mainstack, process):
-    detail = detect_keyword(r'\s+at\s+android\.os\.BinderProxy\.transact\(Native Method\)\n\s+(at\s+.+)\n', mainstack)
-    if detail:
-        return process, detail, None
+    for exp in [r'\s+at\s+android\.os\.BinderProxy\.transact\(Native Method\)\n\s+(at\s+.+)\n', r'\s+at\s+android\.os\.BinderProxy\.transact\(Binder\.java:\d+\)\n\s+(at\s+.+)\n']:
+        detail = detect_keyword(exp, mainstack)
+        if detail:
+            return process, detail, None
     return None, None, None
 
 
@@ -79,6 +80,13 @@ def auto_recover(cpu_usage, mainstack, process):
     return None, None, None
 
 
+def debug(cpu_usage, mainstack, process):
+    detail = detect_keyword(r'.*(SuspendSelfForDebugger).*', mainstack)
+    if detail:
+        return None, None, "DEBUG"
+    return None, None, None
+
+
 def detect_basic_info(logcat):
     process, cpu_usage, mainstack = None, None, None
     for minor_part in logcat.split('\n\n'):
@@ -91,7 +99,7 @@ def detect_basic_info(logcat):
     return process, cpu_usage, mainstack
 
 
-METHODS = [java_binder, native_lock, java_lock, system_busy, native_binder, mthread_busy, auto_recover]
+METHODS = [java_binder, native_lock, java_lock, system_busy, native_binder, mthread_busy, debug, auto_recover]
 
 
 def app_anr(logcat, headers):
@@ -99,7 +107,8 @@ def app_anr(logcat, headers):
     if process and cpu_usage and mainstack:
         for method in METHODS:
             proc, detail, tag = method(cpu_usage, mainstack, process)
-            if tag == "RECOVER":
+            print proc, detail, tag
+            if tag in ["RECOVER", "DEBUG"]:
                 break
             if proc and detail:
                 md5 = gen_hashcode({'issue_owner': proc, 'detail': detail})
