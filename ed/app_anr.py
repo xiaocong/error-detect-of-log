@@ -107,7 +107,6 @@ def app_anr(logcat, headers):
     if process and cpu_usage and mainstack:
         for method in METHODS:
             proc, detail, tag = method(cpu_usage, mainstack, process)
-            print proc, detail, tag
             if tag in ["RECOVER", "DEBUG"]:
                 break
             if proc and detail:
