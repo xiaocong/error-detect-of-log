@@ -4,6 +4,7 @@ import os
 import json
 import subprocess
 from utils import detect_all, jsonify_headers
+import requests
 
 TOOLPATH = '/home/xinqiserver1/android-ndk-r9d/toolchains/arm-linux-androideabi-4.6/prebuilt/linux-x86_64/bin/arm-linux-androideabi-addr2line'
 
@@ -41,3 +42,16 @@ def translate_traces(headers, raw_bt):
             else:
                 traces.append("%s at %s" %(lines[0], lines[1]))
     return traces
+
+
+def backtrace(ua, body):
+    headers = {
+        "X-Dropbox-UA": ua
+    }
+    try:
+        r = requests.post("http://localhost:8800", headers=headers, data=body)
+        print r.text
+        return r.json().get("backtrace") or []
+    except:
+        return []
+

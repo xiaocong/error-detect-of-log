@@ -3,6 +3,7 @@
 import re
 from utils import detect_string, gen_hashcode, detect_all
 from symbols import translate_traces
+from symbols import backtrace as remote_traces
 
 
 IGNORE = ['/data/app-lib', '/mnt/asec/', '/data/data/', '/data/app/']
@@ -46,7 +47,8 @@ def system_tombstone(logcat, headers):
         backtrace, raw_bt = detect_trace(content[2:])
         issue_owner = detect_issue_owner(backtrace)
         if issue_owner and signal and backtrace:
-            traces = translate_traces(headers, raw_bt)
+            # traces = translate_traces(headers, raw_bt)
+            traces = remote_traces(headers.get("X-Dropbox-UA", "="), logcat)
             md5 = gen_hashcode({'issue_owner': issue_owner, 'signal': signal, 'backtrace': backtrace})
             return md5, {'issue_owner': issue_owner, 'signal': signal, 'backtrace': backtrace}, traces
     return None, None, None
