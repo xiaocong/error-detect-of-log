@@ -4,6 +4,7 @@ from app_crash import app_crash
 from app_anr import app_anr
 from app_wtf import app_wtf
 from system_tombstone import system_tombstone
+from kernel_panic import kernel_panic
 from flask import jsonify, request
 import json
 
@@ -14,6 +15,7 @@ TAGS = {
         "system_app_wtf":   app_wtf,
         "system_server_wtf":   app_wtf,
         "system_app_anr":   app_anr,
+        "KERNEL_PANIC": kernel_panic,
 }
 
 
