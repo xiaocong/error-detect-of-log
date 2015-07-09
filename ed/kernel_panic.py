@@ -27,9 +27,9 @@ def kernel_panic(logcat, headers):
         for pattern in KERNEL_PANIC:
             reason = detect_string(content, pattern)
             if reason:
-                result = {'issue_owner': process, 'reason': reason}
+                result = {'issue_owner': process, 'detail': reason}
                 if "should check the ramdump" in reason:
-                    result["random"] = time.time()
+                    result["random"] = str(time.time())
                 md5 = gen_hashcode(result)
                 return md5, result, None
     return None, None, None
