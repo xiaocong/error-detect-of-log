@@ -6,18 +6,19 @@ from app_wtf import app_wtf
 from system_tombstone import system_tombstone
 from system_server_watchdog import system_server_watchdog
 from kernel_panic import kernel_panic
+from system_audit import system_audit
 from flask import jsonify, request
-import json
 
 
 TAGS = {
-        "system_app_crash": app_crash,
-        "SYSTEM_TOMBSTONE": system_tombstone,
-        "system_app_wtf":   app_wtf,
-        "system_server_wtf":   app_wtf,
-        "system_app_anr":   app_anr,
-        "KERNEL_PANIC": kernel_panic,
-        "system_server_watchdog": system_server_watchdog,
+    "system_app_crash": app_crash,
+    "SYSTEM_TOMBSTONE": system_tombstone,
+    "system_app_wtf":   app_wtf,
+    "system_server_wtf":   app_wtf,
+    "system_app_anr":   app_anr,
+    "KERNEL_PANIC": kernel_panic,
+    "system_server_watchdog": system_server_watchdog,
+    "SYSTEM_AUDIT": system_audit,
 }
 
 
