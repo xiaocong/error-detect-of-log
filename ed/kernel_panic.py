@@ -1,4 +1,4 @@
-from utils import detect_string, gen_hashcode
+from utils import detect_string, gen_hashcode, jsonify_headers
 import time
 
 
@@ -17,6 +17,7 @@ IGNORES = [
     r"SysRq : Trigger a crash"
 ]
 
+
 def kernel_panic(logcat, headers):
     parts = logcat.split('\n\n')
     for content in parts[1:]:
@@ -30,6 +31,13 @@ def kernel_panic(logcat, headers):
                 result = {'issue_owner': process, 'detail': reason}
                 if "should check the ramdump" in reason:
                     result["random"] = str(time.time())
+                    try:
+                        UA = jsonify_headers(headers.get('X-Dropbox-UA', '='))
+                        for key in ['imei', 'mac_address', 'sn']:
+                            if UA.get(key):
+                                result[key] = UA.get(key)
+                    except:
+                        pass
                 md5 = gen_hashcode(result)
                 return md5, result, None
     return None, None, None

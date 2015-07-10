@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import os
-import json
 import subprocess
 from utils import detect_all, jsonify_headers
 import requests
@@ -27,7 +26,8 @@ def valide_headers(headers):
 
 def translate_traces(headers, raw_bt):
     UA = valide_headers(headers)
-    if not UA: return None
+    if not UA:
+        return None
     addr_libs = detect_all(raw_bt, r'\s+(\w+\s+(?:/.+)+)\s+')
     traces = []
     for addr_lib in addr_libs:
@@ -40,7 +40,7 @@ def translate_traces(headers, raw_bt):
                 if "??" in line:
                     break
             else:
-                traces.append("%s at %s" %(lines[0], lines[1]))
+                traces.append("%s at %s" % (lines[0], lines[1]))
     return traces
 
 
@@ -54,4 +54,3 @@ def backtrace(ua, body):
         return r.json().get("backtrace") or []
     except:
         return []
-
