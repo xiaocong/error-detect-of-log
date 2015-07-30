@@ -1,5 +1,4 @@
 from utils import detect_string, gen_hashcode, jsonify_headers
-import time
 
 
 KERNEL_PANIC = [
@@ -30,10 +29,9 @@ def kernel_panic(logcat, headers):
             if reason:
                 result = {'issue_owner': process, 'detail': reason}
                 if "should check the ramdump" in reason:
-                    result["random"] = str(time.time())
                     try:
                         UA = jsonify_headers(headers.get('X-Dropbox-UA', '='))
-                        for key in ['imei', 'mac_address', 'sn']:
+                        for key in ['imei', 'mac_address', 'sn', 'phone_number']:
                             if UA.get(key):
                                 result[key] = UA.get(key)
                     except:
