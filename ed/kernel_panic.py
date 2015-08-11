@@ -28,7 +28,7 @@ def kernel_panic(logcat, headers):
             reason = detect_string(content, pattern)
             if reason:
                 result = {'issue_owner': process, 'detail': reason}
-                if "should check the ramdump" in reason:
+                if "ramdump" in reason:
                     try:
                         UA = jsonify_headers(headers.get('X-Dropbox-UA', '='))
                         for key in ['imei', 'mac_address', 'sn', 'phone_number']:
