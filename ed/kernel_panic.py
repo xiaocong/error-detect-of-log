@@ -31,6 +31,8 @@ def kernel_panic(logcat, headers):
                 if "ramdump" in reason:
                     try:
                         UA = jsonify_headers(headers.get('X-Dropbox-UA', '='))
+                        if UA.get('type') == 'user' or UA.get('buildtype') == 'user':
+                            return None, None, None
                         for key in ['imei', 'mac_address', 'sn', 'phone_number']:
                             if UA.get(key):
                                 result[key] = UA.get(key)
